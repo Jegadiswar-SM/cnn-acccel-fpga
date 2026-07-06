@@ -34,7 +34,7 @@ flowchart LR
     PE1 --> ReLU1[relu]
     PE2 --> ReLU2[relu]
     PE3 --> ReLU3[relu]
-    ReLU0 --> Pack[Pack {relu_3,relu_2,relu_1,relu_0}]
+    ReLU0 --> Pack["Pack relu_3,relu_2,relu_1,relu_0"]
     ReLU1 --> Pack
     ReLU2 --> Pack
     ReLU3 --> Pack
