@@ -1,0 +1,25 @@
+# Yosys synthesis for GLS (preserve hierarchy)
+read_verilog -sv ../rtl/pe.v
+read_verilog -sv ../rtl/mac_array.v
+read_verilog -sv ../rtl/relu.v
+read_verilog -sv ../rtl/cnn_regs.v
+read_verilog -sv ../rtl/cnn_top.v
+
+hierarchy -check -top cnn_top
+
+synth
+
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+
+abc -g AND,OR,XOR
+opt
+clean
+
+stat -width
+write_verilog -noattr -noexpr synthesized/cnn_top_synth_gls.v

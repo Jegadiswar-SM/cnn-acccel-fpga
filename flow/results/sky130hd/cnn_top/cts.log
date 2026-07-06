@@ -1,0 +1,109 @@
+OpenROAD 26Q2-1715-g299f30154c 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 8 thread(s).
+mkdir -p ./objects/sky130hd/cnn_top/base
+/OpenROAD-flow-scripts/flow/scripts/flow.sh 4_1_cts cts
+Running cts.tcl, stage 4_1_cts
+read_liberty /OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/cnn_top/base/3_place.odb
+read_sdc ./results/sky130hd/cnn_top/base/3_place.sdc
+source /OpenROAD-flow-scripts/flow/platforms/sky130hd/setRC.tcl
+clock_tree_synthesis -repair_clock_nets
+[INFO CTS-0050] Root buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0051] Sink buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    sky130_fd_sc_hd__clkbuf_16
+[INFO CTS-0049] Characterization buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0007] Net "clk" found for clock "core_clock".
+[INFO CTS-0010]  Clock net "clk" has 712 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk.
+[INFO CTS-0028]  Total number of sinks: 712.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 13600  dbu (13 um).
+[INFO CTS-0023]  Original sink region: [(5785, 44940), (485105, 425740)].
+[INFO CTS-0024]  Normalized sink region: [(0.425368, 3.30441), (35.6695, 31.3044)].
+[INFO CTS-0025]     Width:  35.2441.
+[INFO CTS-0026]     Height: 28.0000.
+ Level 1
+    Direction: Horizontal
+    Sinks per sub-region: 356
+    Sub-region size: 17.6221 X 28.0000
+[INFO CTS-0034]     Segment length (rounded): 8.
+ Level 2
+    Direction: Vertical
+    Sinks per sub-region: 178
+    Sub-region size: 17.6221 X 14.0000
+[INFO CTS-0034]     Segment length (rounded): 6.
+ Level 3
+    Direction: Horizontal
+    Sinks per sub-region: 89
+    Sub-region size: 8.8110 X 14.0000
+[INFO CTS-0034]     Segment length (rounded): 4.
+ Level 4
+    Direction: Vertical
+    Sinks per sub-region: 45
+    Sub-region size: 8.8110 X 7.0000
+[INFO CTS-0034]     Segment length (rounded): 4.
+ Level 5
+    Direction: Horizontal
+    Sinks per sub-region: 23
+    Sub-region size: 4.4055 X 7.0000
+[INFO CTS-0034]     Segment length (rounded): 2.
+ Level 6
+    Direction: Vertical
+    Sinks per sub-region: 12
+    Sub-region size: 4.4055 X 3.5000
+[INFO CTS-0034]     Segment length (rounded): 1.
+[INFO CTS-0032]  Stop criterion found. Max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 712.
+[INFO CTS-0018]     Created 81 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 3.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 3.
+[INFO CTS-0015]     Created 81 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 4:1, 6:5, 7:7, 8:8, 9:5, 10:10, 11:2, 12:6, 13:2, 14:7, 16:3, 17:2, 18:3, 19:1, 21:1, 26:1..
+[INFO CTS-0017]     Max level of the clock tree: 6.
+[INFO CTS-0098] Clock net "clk"
+[INFO CTS-0099]  Sinks 760
+[INFO CTS-0100]  Leaf buffers 0
+[INFO CTS-0101]  Average sink wire length 728.91 um
+[INFO CTS-0102]  Path depth 3 - 3
+[INFO CTS-0207]  Dummy loads inserted 48
+estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 249347.89 um^2, Instances area: 109118.40 um^2, Utilization: 43.8%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1101] Legalizing using diamond search.
+Movements Summary
+---------------------------------------
+Total cells:                    8773
+Diamond Move Success:           8773 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement       1413.0 u
+average displacement        0.1 u
+max displacement            8.2 u
+original HPWL          217567.0 u
+legalized HPWL         225101.9 u
+delta HPWL                    3 %
+
+estimate_parasitics -placement
+Warning: master sky130_ef_sc_hd__decap_12 has signal pins but no liberty cell
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -match_cell_footprint -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0033] No hold violations found.
+Warning: master sky130_ef_sc_hd__decap_12 has signal pins but no liberty cell
+Error: cts.tcl, 83 child killed: illegal instruction
+Elapsed time: 0:03.51[h:]min:sec. CPU time: user 5.01 sys 0.75 (164%). Peak memory: 216512KB.
+make[1]: *** [Makefile:513: do-4_1_cts] Error 1
+make: *** [Makefile:513: results/sky130hd/cnn_top/base/4_1_cts.odb] Error 2
